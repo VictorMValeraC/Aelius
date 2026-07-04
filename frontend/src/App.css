@@ -1,0 +1,25 @@
+#root {
+  min-height: 100vh;
+}
+
+.app-shell {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 2rem;
+}
+
+.hero {
+  max-width: 760px;
+  text-align: center;
+}
+
+.hero h1 {
+  margin-bottom: 1rem;
+  font-size: 4rem;
+}
+
+.hero p {
+  font-size: 1.25rem;
+  line-height: 1.6;
+}

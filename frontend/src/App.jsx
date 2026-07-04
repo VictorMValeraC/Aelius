@@ -1,14 +1,8 @@
 import './App.css'
+import Home from './pages/Home/Home'
 
 function App() {
-  return (
-    <main className="app-shell">
-      <section className="hero">
-        <h1>Aelius</h1>
-        <p>Arquitectura a proyectar. Personas primero. Tecnología después.</p>
-      </section>
-    </main>
-  )
+  return <Home />
 }
 
 export default App

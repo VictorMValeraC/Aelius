@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { analyzeMessage } from '../../services/cognitiveEngine'
 
 function Chat() {
   const [message, setMessage] = useState('')
@@ -11,11 +12,17 @@ function Chat() {
       return
     }
 
-    const newMessage = {
-      id: crypto.randomUUID(),
-      text: message.trim(),
-      createdAt: new Date().toISOString(),
-    }
+    const analysis = analyzeMessage(message)
+
+const newMessage = {
+  id: crypto.randomUUID(),
+  text: message.trim(),
+  createdAt: new Date().toISOString(),
+  analysis,
+}
+
+setMessages([...messages, newMessage])
+setMessage('')
 
     setMessages([...messages, newMessage])
     setMessage('')
@@ -35,7 +42,19 @@ function Chat() {
           <ul className="message-list">
             {messages.map((item) => (
               <li key={item.id} className="message-item">
-                {item.text}
+                <p>{item.text}</p>
+
+{item.analysis.tasks.length > 0 && (
+  <div className="analysis-card">
+    <strong>Aelius encontró posibles tareas:</strong>
+
+    <ul>
+      {item.analysis.tasks.map((task) => (
+        <li key={task.id}>{task.title}</li>
+      ))}
+    </ul>
+  </div>
+)}
               </li>
             ))}
           </ul>
@@ -50,7 +69,7 @@ function Chat() {
           onChange={(event) => setMessage(event.target.value)}
         />
 
-        <button type="submit">Enviar</button>
+        <button type="submit">Compartir</button>
       </form>
     </section>
   )
